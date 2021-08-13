@@ -8,9 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class MemberService {
+//    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-
+// MemoryMemberRepository의 변수가 static이라 테스트가 정상적으로 되긴하지만
+// 테스트 코드와 같은 인스턴스를 사용하기 위해 (의존성 주입)
+    private final MemberRepository memberRepository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+//
     /**
      * 회원 가입
      */
