@@ -3,16 +3,22 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
+    // MemberService를 @Service 애노테이션으로 설정하여, 스프링 컨테이너에 빈으로 등록 : 인스턴스를 스프링에서 관리해 줌
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
 // MemoryMemberRepository의 변수가 static이라 테스트가 정상적으로 되긴하지만
 // 테스트 코드와 같은 인스턴스를 사용하기 위해 (의존성 주입)
     private final MemberRepository memberRepository;
+    //MemberService를 스프링에 있는 MemberRepsotory와 연결시켜줌
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
