@@ -5,11 +5,13 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service
+@Transactional // JPA에서 데이터를 저장하거나 변경하려면 해당 애노테이션을 선언해주어야 함(메서드에 선언해도 됨)
 public class MemberService {
     // MemberService를 @Service 애노테이션으로 설정하여, 스프링 컨테이너에 빈으로 등록 : 인스턴스를 스프링에서 관리해 줌
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
