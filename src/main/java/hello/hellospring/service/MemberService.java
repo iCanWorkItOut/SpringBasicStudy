@@ -29,21 +29,28 @@ public class MemberService {
      * 회원 가입
      */
     public Long join(Member member) {
-        // 같은 이름이 있는 중복 회원X
+        long start = System.currentTimeMillis();
+        try {
+            // 같은 이름이 있는 중복 회원X
 //        Optional<Member> result = memberRepository.findByName(member.getName());
 //        result.ifPresent(m -> { // ifPresent() : 값이 있으면
 //            throw new IllegalStateException("이미 존재하는 회원입니다.");
 //        });
-        // 위와 같은 코드
-        // 로직이기 때문에 메서드로 만드는게 좋음.(Ctrl+Alt+M)
+            // 위와 같은 코드
+            // 로직이기 때문에 메서드로 만드는게 좋음.(Ctrl+Alt+M)
 //        memberRepository.findByName(member.getName())
 //                .ifPresent(m -> { // ifPresent() : 값이 있으면
 //                    throw new IllegalStateException("이미 존재하는 회원입니다.");
 //                });
-        validateDuplicateMember(member); // 중복 회원 검증
+            validateDuplicateMember(member); // 중복 회원 검증
 
-        memberRepository.save(member);
-        return member.getId();
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -57,7 +64,14 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+        long start = System.currentTimeMillis();
+        try {
+            return memberRepository.findAll();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers = " + timeMs + "ms");
+        }
     }
 
     /**
