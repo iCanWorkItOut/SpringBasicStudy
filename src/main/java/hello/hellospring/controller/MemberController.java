@@ -20,6 +20,7 @@ public class MemberController {
     @Autowired // MemberController가 생성될 때 스프링이 가지고 있는 MemeberService(컨테이너에 등록시켜야함 @Service)를 자동으로 연결 시켜줌
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+        System.out.println("memberService = " + memberService.getClass()); // 실제 Proxy가 주입되는지 콘솔에 출력해서 확인
     }
 
 /*  필드 주입을 통한 DI : 여러 컴포넌트 간에 순환 참조가 발생할 수 있음
